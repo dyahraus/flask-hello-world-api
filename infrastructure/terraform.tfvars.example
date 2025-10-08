@@ -1,0 +1,40 @@
+# Example variable values
+# Copy this file to terraform.tfvars and update with your values
+
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+
+service_name            = "flask-hello-world-api"
+service_account_name    = "flask-hello-world-sa"
+artifact_registry_repository_id = "flask-hello-world-repo"
+
+# Container configuration
+container_port = 8080
+flask_env      = "production"
+# secret_key     = "your-secret-key-here"  # Uncomment and set, or use Secret Manager
+
+# Resource limits
+cpu_limit              = "1000m"  # 1 vCPU
+memory_limit           = "512Mi"  # 512 MB
+cpu_always_allocated   = false    # CPU only allocated during request processing
+
+# Scaling configuration
+min_instance_count                = 0   # Scale to zero when not in use
+max_instance_count                = 10  # Maximum 10 instances
+max_instance_request_concurrency  = 80  # 80 concurrent requests per instance
+
+# Access control
+allow_unauthenticated = true  # Set to false to require authentication
+
+# Protection and monitoring
+deletion_protection = false  # Set to true in production
+enable_monitoring   = false  # Set to true to enable alerting
+# notification_channels = ["projects/your-project/notificationChannels/123456"]
+
+# Labels
+labels = {
+  app         = "flask-hello-world"
+  environment = "production"
+  managed_by  = "terraform"
+  team        = "platform"
+}
